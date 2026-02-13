@@ -1,0 +1,7 @@
+Attempting imports...
+SUCCESS: langchain_community.document_loaders.UnstructuredPDFLoader
+SUCCESS: langchain_text_splitters.RecursiveCharacterTextSplitter
+SUCCESS: langchain_huggingface.HuggingFaceEmbeddings
+SUCCESS: langchain_chroma.Chroma
+SUCCESS: langchain_groq.ChatGroq
+SUCCESS: langchain.chains.RetrievalQA
