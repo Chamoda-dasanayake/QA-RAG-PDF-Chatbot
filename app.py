@@ -1,17 +1,11 @@
 import os
 import streamlit as st
 
-st.write("Debug: App starting...")
-try:
-    from rag_utility import process_document_to_chroma_db, answer_question
-    st.write("Debug: rag_utility imported successfully.")
-except Exception as e:
-    st.error(f"Error importing rag_utility: {e}")
-  
+from rag_utility import process_document_to_chroma_db, answer_question  
 
 working_dir = os.getcwd()
 
-st.title("Llama-3.3-70B - Document RAG")
+st.title("Document RAG (Llama-3 8B)")
 uploaded_file = st.file_uploader("Upload a PDF document", type=["pdf"]) 
 
 if uploaded_file is not None:
@@ -19,13 +13,19 @@ if uploaded_file is not None:
     with open(save_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     
-    process_document = process_document_to_chroma_db(uploaded_file.name)
-    st.info("Document uploaded successfully")
+    with st.spinner("Processing document..."):
+        process_document = process_document_to_chroma_db(uploaded_file.name)
+    
+    if process_document == 0:
+        st.success("Document uploaded and processed successfully")
+    else:
+        st.error("Failed to process document. Check terminal logs for details.")
 
 user_question = st.text_input("Enter your question about the document:")    
 
 if st.button("Get Answer"):
-    answer = answer_question(user_question)
+    with st.spinner("Getting answer..."):
+        answer = answer_question(user_question)
 
-    st.markdown("###Llama-3.3-70B Response:")
+    st.markdown("### Response:")
     st.write(answer)
