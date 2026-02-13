@@ -26,7 +26,7 @@ def get_llm():
     global llm
     if llm is None:
         llm = ChatGroq(
-            model="llama3-8b-8192",
+            model="llama-3.1-8b-instant",
             temperature=0
         )
     return llm

@@ -5,7 +5,7 @@ from rag_utility import process_document_to_chroma_db, answer_question
 
 working_dir = os.getcwd()
 
-st.title("Document RAG (Llama-3 8B)")
+st.title("Document RAG (Llama-3.1 8B)")
 uploaded_file = st.file_uploader("Upload a PDF document", type=["pdf"]) 
 
 if uploaded_file is not None:
